@@ -1,10 +1,10 @@
 ﻿# Genetic Risk Score Calculation
 
 - **Date Written:** 22.04.2019
-- **Date Last Updated:** 23.04.2019
+- **Date Last Updated:** 14.04.2026
 
 ## Description
-Genetic risk scores (AKA: polygenic scores, polygenic risk scores, or genome-wide scores) is a summary measure of a set of risk-associated genetic variants and can be easily calculated using PLINK
+Genetic risk scores (AKA: polygenic scores, polygenic risk scores, or genome-wide scores) is a summary measure of a set of risk-associated genetic variants and can be easily calculated using PLINK. 
 
 ## Requirements 
 1. **PLINK** (v1.9 is used here)
@@ -30,14 +30,18 @@ Genetic risk scores (AKA: polygenic scores, polygenic risk scores, or genome-wid
 ## PLINK Commands
 
 ```bash 
-module load plink #if on Biowulf, this loads v1.9
+module load plink #if on Biowulf, this loads vXX. 
 plink --bfile $yourfile --score $scorefile --out $outputfilename
 ```
 Where: 
 - `$yourfile` = standard binary file prefix (will point to `.bed`, `.bim`, and `.fam` files)
-- `$outputfilename` = whatever you want it to be, the output will have the extension `.profile`
+- `$outputfilename` = whatever you want it to be, the output will have the extension `.sscore`
 - `$scorefile` = file with variant-name, allele and score-value
 
+## Alternatives to PLINK
+Several additional packages use different approaches to calculate genetic risk score, including: 
+   - [PRSice](https://choishingwan.github.io/PRSice/)
+   - [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html)
 
 ## Optional Follow-Up Analyses (Using Case-Control Data)
 
