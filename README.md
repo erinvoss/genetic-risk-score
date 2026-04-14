@@ -35,7 +35,7 @@ plink --bfile $yourfile --score $scorefile --out $outputfilename
 ```
 Where: 
 - `$yourfile` = standard binary file prefix (will point to `.bed`, `.bim`, and `.fam` files)
-- `$outputfilename` = whatever you want it to be, the output will have the extension `.sscore`
+- `$outputfilename` = whatever you want it to be, the output will have the extension `.profile` (or `.sscore` if using plink2)
 - `$scorefile` = file with variant-name, allele and score-value
 
 ## Alternatives to PLINK
