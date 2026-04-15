@@ -9,7 +9,7 @@ Genetic risk scores (AKA: polygenic scores, polygenic risk scores, or genome-wid
 ## Requirements 
 1. **PLINK** (v1.9 is used here)
 	 - The most common and easiest way to do this in PLINK ([v1.9](https://www.cog-genomics.org/plink/1.9/score))
-	 - Another way to do this is using [PRSice](https://choishingwan.github.io/PRSice/)
+	 - Other tools, including [PRSice](https://choishingwan.github.io/PRSice/) and [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
 2. **PLINK Binary Files** (`.bed`, `.bim`, `.fam`) 
 3. **Score File** 
 	- This is a file with a variant identifier, allele, and an associated score value
@@ -37,11 +37,6 @@ Where:
 - `$yourfile` = standard binary file prefix (will point to `.bed`, `.bim`, and `.fam` files)
 - `$outputfilename` = whatever you want it to be, the output will have the extension `.profile` (or `.sscore` if using plink2)
 - `$scorefile` = file with variant-name, allele and score-value
-
-## Alternatives to PLINK
-Several additional packages use different approaches to calculate genetic risk score, including: 
-   - [PRSice](https://choishingwan.github.io/PRSice/)
-   - [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html)
 
 ## Optional Follow-Up Analyses (Using Case-Control Data)
 
