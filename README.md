@@ -32,8 +32,8 @@ Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wi
 ## PLINK Commands
 
 ```bash 
-module load plink #if on Biowulf
-plink --bfile $yourfile --score $scorefile --out $outputfilename
+module load plink2 #if on Biowulf
+plink2 --bfile $yourfile --score $scorefile --out $outputfilename
 ```
 Where: 
 - `$yourfile` = standard binary file prefix (will point to `.bed`, `.bim`, and `.fam` files)
