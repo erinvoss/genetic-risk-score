@@ -8,18 +8,18 @@ Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wi
 
 ## Requirements 
 1. **PLINK** (v2.0 is used here)
-	- The most common and easiest way to do this in PLINK [v2.0][https://www.cog-genomics.org/plink/2.0/score]
-	- GP2 has developed an end-to-end PRS calculation pipeline using Nextflow, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
-	- Other tools, including [PRSice](https://choishingwan.github.io/PRSice/) and [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
- - 
+- The most common and easiest way to do this in PLINK [v2.0][https://www.cog-genomics.org/plink/2.0/score]
+- GP2 has developed an end-to-end PRS calculation pipeline using Nextflow, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
+- Other tools, including [PRSice](https://choishingwan.github.io/PRSice/) and [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
+
 2. **PLINK Binary Files** (`.bed`, `.bim`, `.fam`) 
 3. **Score File** 
-	- This is a file with a variant identifier, allele, and an associated score value
-	- These scores come from GWA Studies 
-	- This [repository](https://github.com/erinvoss/polygenic-risk-score) has the risk score file for Parkinson's disease based on the most recent PD GWAS (META5) [Nalls _et al._, 2019](https://www.biorxiv.org/content/10.1101/388165v3)
-		- `META5_GRS_chr_bp.txt` has variants structured as chromosome:basepair
-		- `META5_GRS_RSid.txt` has variants structured as RS-IDs
-	- The format of the file should match this example: 
+- This is a file with a variant identifier, allele, and an associated score value
+- These scores come from GWA Studies 
+- This [repository](https://github.com/erinvoss/polygenic-risk-score) has the risk score file for Parkinson's disease based on the most recent PD GWAS (META5) [Nalls _et al._, 2019](https://www.biorxiv.org/content/10.1101/388165v3)
+	- `META5_GRS_chr_bp.txt` has variants structured as chromosome:basepair
+	- `META5_GRS_RSid.txt` has variants structured as RS-IDs
+- The format of the file should match this example: 
 ```
 1:154898185	C	0.2812
 1:155135036	A	0.6068
@@ -63,17 +63,17 @@ temp <- anti_join(data1, data2, by='FID')
 data <- rbind(temp, MM)
 
 # Convert score values to Z-score
-meanGRS <- mean(data$SCORE)
-sdGRS <- sd(data$SCORE)
-data$SCOREZ <- (data$SCORE - meanGRS)/sdGRS
+meanPRS <- mean(data$SCORE1_SUM) 
+sdPRS <- sd(data$SCORE1_SUM)
+data$SCOREZ <- (data$SCORE1_SUM - meanPRS)/sdPRS
 
 # Generate boxplot case-control data 
 pdf("$FILENAME.pdf",width=4)
-boxplot(data$SCOREZ~data$PHENO.x,col=c('powderblue', 'pink1'),xlab="0 control, 1 PD-case",ylab="GRS Z-score")
+boxplot(data$SCOREZ~data$PHENO.x,col=c('powderblue', 'pink1'),xlab="0 control, 1 PD-case",ylab="PRS Z-score")
 grid()
 dev.off()
 
-# Calculate if the GRS is statistical significant between cases and controls using AGE, SEX and first 5 principal components (PC)
+# Calculate if the PRS is statistically significant between cases and controls using AGE, SEX and first 5 principal components (PC)
 thisFormula1 <- formula(paste("PHENO ~ SCOREZ + SEX_COV + AGE + PC1 + PC2 + PC3 + PC4 + PC5"))
 model1 <- glm(thisFormula1, data = data, ,family=binomial)
 print(summary(model1))
