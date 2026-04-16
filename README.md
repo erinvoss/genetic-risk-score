@@ -43,6 +43,11 @@ Where:
 
 ## Optional Follow-Up Analyses (Using Case-Control Data)
 
+The code below provides R and Python steps to compare PRS scores between case and control individuals in your PLINK dataset. 
+First, individual PRS scores are converted to Z-scores before generating a boxplot to visually compare PRS between groups. 
+Lastly, we apply a GLM to the data to evaluate whether PRS differs significantly between cases and controls after accounting for covariates includge age, sex, and principal components. 
+
+Option 1: R
 ```bash, R
 module load R #if on Biowulf
 
@@ -82,4 +87,75 @@ print(summary(model1))
 # note sometimes the P-value shows this < 2e-16
 # then use this : summary(model1)$coefficients[,4] 
 # this will output the real P-value
+```
+
+Option 2: Python 
+```bash, python3
+module load python
+
+# Load in the necessary packages 
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+
+# Load in data from PRS calculation step above (file ending in .sscore
+# PLINK2 PRS output
+data1 = pd.read_csv("yourfile.sscore", sep=r"\s+")
+
+# If needed, reformat plink output header
+# data1.rename(columns={"#FID": "FID"}, inplace=True)
+
+# Covariates
+data2 = pd.read_csv("yourfile_covariates.txt", sep=r"\s+")
+
+# Drop the IID column to prevent columns duplication
+if "IID" in data2.columns:
+    data2 = data2.drop(columns=["IID"])
+
+# Merge PRS and covariate dataframes by FID column
+data = pd.merge(data1, data2, on="FID", how="left")
+
+# Convert PRS score values to Z-score
+data["SCOREZ"] = (
+    data["SCORE1_SUM"] - data["SCORE1_SUM"].mean()
+) / data["SCORE1_SUM"].std(ddof=1)
+
+# Generate boxplot case-control data 
+plt.figure(figsize=(4,4))
+
+plt.boxplot(
+    [
+        data.loc[data["PHENO"] == 0, "SCOREZ"], # Verify that Plink file encodes control = 0
+        data.loc[data["PHENO"] == 1, "SCOREZ"]  # Verify that Plink file encodes case = 1
+    ],
+    labels=["0 control", "1 PD-case"]
+)
+
+plt.xlabel("0 control, 1 PD-case")
+plt.ylabel("PRS Z-score")
+plt.grid(True)
+
+plt.savefig("FILENAME.pdf")
+plt.close()
+
+# Logistic regression (glm family=binomial)
+# Calculate if the PRS is statistically significant between cases and controls using AGE, SEX and first 5 principal components (PC)
+
+predictors = [
+    "SCOREZ", "SEX_COV", "AGE",
+    "PC1", "PC2", "PC3", "PC4", "PC5"
+]
+
+model_data = data.dropna(subset=["PHENO"] + predictors)
+
+X = model_data[predictors]
+X = sm.add_constant(X)
+y = model_data["PHENO"]
+
+model1 = sm.Logit(y, X).fit()
+
+print(model1.summary())
+print("\nCoefficient p-values:")
+print(model1.pvalues)
 ```
