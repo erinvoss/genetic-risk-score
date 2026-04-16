@@ -1,20 +1,22 @@
-﻿# Genetic Risk Score Calculation
+﻿# Polygenic Risk Score (PRS) Calculation
 
 - **Date Written:** 22.04.2019
 - **Date Last Updated:** 14.04.2026
 
 ## Description
-Genetic risk scores (AKA: polygenic scores, polygenic risk scores, or genome-wide scores) is a summary measure of a set of risk-associated genetic variants and can be easily calculated using PLINK. 
+Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wide scores) is a summary measure of a set of risk-associated genetic variants and can be easily calculated using PLINK.
 
 ## Requirements 
-1. **PLINK** (v1.9 is used here)
-	 - The most common and easiest way to do this in PLINK ([v1.9](https://www.cog-genomics.org/plink/1.9/score))
-	 - Other tools, including [PRSice](https://choishingwan.github.io/PRSice/) and [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
+1. **PLINK** (v2.0 is used here)
+	- The most common and easiest way to do this in PLINK [v2.0][https://www.cog-genomics.org/plink/2.0/score]
+	- GP2 has developed an end-to-end PRS calculation pipeline using Nextflow, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
+	- Other tools, including [PRSice](https://choishingwan.github.io/PRSice/) and [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
+ - 
 2. **PLINK Binary Files** (`.bed`, `.bim`, `.fam`) 
 3. **Score File** 
 	- This is a file with a variant identifier, allele, and an associated score value
 	- These scores come from GWA Studies 
-	- This [repository](https://github.com/neurogenetics/genetic-risk-score) has the risk score file for Parkinson's disease based on the most recent PD GWAS (META5) [Nalls _et al._, 2019](https://www.biorxiv.org/content/10.1101/388165v3)
+	- This [repository](https://github.com/erinvoss/polygenic-risk-score) has the risk score file for Parkinson's disease based on the most recent PD GWAS (META5) [Nalls _et al._, 2019](https://www.biorxiv.org/content/10.1101/388165v3)
 		- `META5_GRS_chr_bp.txt` has variants structured as chromosome:basepair
 		- `META5_GRS_RSid.txt` has variants structured as RS-IDs
 	- The format of the file should match this example: 
@@ -30,12 +32,12 @@ Genetic risk scores (AKA: polygenic scores, polygenic risk scores, or genome-wid
 ## PLINK Commands
 
 ```bash 
-module load plink #if on Biowulf, this loads vXX. 
+module load plink #if on Biowulf
 plink --bfile $yourfile --score $scorefile --out $outputfilename
 ```
 Where: 
 - `$yourfile` = standard binary file prefix (will point to `.bed`, `.bim`, and `.fam` files)
-- `$outputfilename` = whatever you want it to be, the output will have the extension `.profile` (or `.sscore` if using plink2)
+- `$outputfilename` = whatever you want it to be, the output will have the extension `.sscore` (or `.profile` if using plink v1.9)
 - `$scorefile` = file with variant-name, allele and score-value
 
 ## Optional Follow-Up Analyses (Using Case-Control Data)
@@ -47,7 +49,7 @@ module load R #if on Biowulf
 library(dplyr)
 
 # Load in data from the step above
-data1 = read.table("$yourfile.profile",header=T)
+data1 = read.table("$yourfile.sscore",header=T)
 
 # Also load in covariates (this can be done in PLINK or using flashPCA)
 data2 = read.table("$yourfile_covariates.txt",header=T)
