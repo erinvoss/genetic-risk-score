@@ -12,7 +12,8 @@ Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wi
 - GP2 has developed an end-to-end PRS calculation pipeline using Nextflow, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
 - Other tools, including [PRSice](https://choishingwan.github.io/PRSice/) and [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
 
-2. **PLINK Binary Files** (`.bed`, `.bim`, `.fam`) 
+2. **PLINK Binary Files** (`.bed`, `.bim`, `.fam`)
+
 3. **Score File** 
 - This is a file with a variant identifier, allele, and an associated score value
 - These scores come from GWA Studies of your disease of interest.
@@ -43,9 +44,11 @@ Where:
 
 ## Optional Follow-Up Analyses (Using Case-Control Data)
 
-The code below provides R and Python steps to compare PRS scores between case and control individuals in your PLINK dataset. 
-First, individual PRS scores are converted to Z-scores before generating a boxplot to visually compare PRS between groups. 
-Lastly, we apply a GLM to the data to evaluate whether PRS differs significantly between cases and controls after accounting for covariates includge age, sex, and principal components. 
+The code below provides R and Python options to compare PRS scores between case and control individuals in your PLINK dataset as follows:
+1. Convert individual PRS scores to Z-scores.
+2. Generate a boxplot to visually compare PRS between groups.
+3. Apply a generalized linear model to evaluate whether PRS differs significantly between cases and controls.
+  - GLM takes covariates includge age, sex, and principal components into account. 
 
 Option 1: R
 ```bash, R
@@ -155,6 +158,7 @@ y = model_data["PHENO"]
 
 model1 = sm.Logit(y, X).fit()
 
+# Print model summary and p-values
 print(model1.summary())
 print("\nCoefficient p-values:")
 print(model1.pvalues)
