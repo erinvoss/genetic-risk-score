@@ -8,7 +8,7 @@ Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wi
 
 ## Requirements 
 1. **PLINK** (v2.0 is used here)
-- The most common and easiest way to do this in PLINK [v2.0][https://www.cog-genomics.org/plink/2.0/score]
+- The most common and easiest way to do this in PLINK [v2.0](https://www.cog-genomics.org/plink/2.0/score)
 - GP2 has developed an end-to-end PRS calculation pipeline using Nextflow, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
 - Other tools, including [PRSice](https://choishingwan.github.io/PRSice/) and [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
 
