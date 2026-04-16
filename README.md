@@ -6,19 +6,20 @@
 ## Description
 Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wide scores) is a summary measure of a set of risk-associated genetic variants and can be easily calculated using PLINK.
 
-The GP2 Learning Platform's [Beginner Bioinformatics for Parkinson's Disease Genetics](https://gp2.org/training-events/beginner-bioinformatics-for-parkinsons-disease-genetics/) virtual short course provides an overview of polygenic risk scores, how they are calculated, how to implement them for Parkinson's Disease, and how to interpret results. 
+The GP2 Learning Platform's [Beginner Bioinformatics for Parkinson's Disease Genetics](https://gp2.org/training-events/beginner-bioinformatics-for-parkinsons-disease-genetics/) virtual short course includes a PRS module that provides an overview of polygenic risk scores, how they are calculated, how to implement them for Parkinson's Disease, and how to interpret results. 
 
-### How to Calculate Polygenic Risk Scores 
+## How to Calculate Polygenic Risk Scores 
 Multiple methods for polygenic risk score calculation have been developed by the bioinformatics community. Below, we outline the easiest and most common option, which is to use the plink2 --score function. 
 
-### Additional Options and Resources
-GP2 has developed an end-to-end PRS calculation pipeline using Nextflow, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
+### Additional Options
+GP2 has developed an end-to-end PRS calculation pipeline using plink2, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
 
-[PRSice](https://choishingwan.github.io/PRSice/) 
-[LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
+Plink2 --score assumes variants are independent, which is appropriate for curated variant sets such as the score file linked below. Additional methods such as [PRSice](https://choishingwan.github.io/PRSice/) and [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html) take steps to account for linkage disequilibrium (LD) between variants using Clumping and Thresholding (PRSice) or Bayesian (LDpred2) modeling approaches. 
+
+Depending on the size and composition of your dataset, you may want to explore these approaches. If so, this GP2 [repository](https://github.com/GP2code/multiancestry-PRS_PRSice) contains a PRSice workflow.
 
 
-## Requirements 
+### Requirements 
 1. **PLINK** ([v2.0 is used here](https://www.cog-genomics.org/plink/2.0/score))
 
 2. **PLINK Binary Files** (`.bed`, `.bim`, `.fam`)
