@@ -15,10 +15,11 @@ Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wi
 2. **PLINK Binary Files** (`.bed`, `.bim`, `.fam`) 
 3. **Score File** 
 - This is a file with a variant identifier, allele, and an associated score value
-- These scores come from GWA Studies 
-- This [repository](https://github.com/erinvoss/polygenic-risk-score) has the risk score file for Parkinson's disease based on the most recent PD GWAS (META5) [Nalls _et al._, 2019](https://www.biorxiv.org/content/10.1101/388165v3)
-	- `META5_GRS_chr_bp.txt` has variants structured as chromosome:basepair
-	- `META5_GRS_RSid.txt` has variants structured as RS-IDs
+- These scores come from GWA Studies of your disease of interest.
+  	- Parkinson's Disease score file: [insert here] 
+  	- Alzheimer's Disease score file: [insert here] 
+  	- Additional diseases: [insert here] 
+- Important: your plink files must use the same  reference genome build used to generate the score file (GRCh38). 
 - The format of the file should match this example: 
 ```
 1:154898185	C	0.2812
