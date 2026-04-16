@@ -42,7 +42,7 @@ Depending on the size and composition of your dataset, you may want to explore t
 ## PLINK Commands
 
 ```bash 
-module load plink2 #if on Biowulf
+module load plink2 # if on HPC server (such as Biowulf)
 plink2 --bfile $yourfile --score $scorefile --out $outputfilename
 ```
 Where: 
@@ -59,7 +59,7 @@ The code below provides R and Python options to compare PRS scores between case 
 
 **Option 1: R**
 ```bash, R
-module load R #if on Biowulf
+module load R # if on HPC server (such as Biowulf)
 
 # Load in the necessary packages 
 library(dplyr)
@@ -101,7 +101,7 @@ print(summary(model1))
 
 **Option 2: Python** 
 ```bash, python3
-module load python
+module load python # if on HPC server (such as Biowulf)
 
 # Load in the necessary packages 
 import pandas as pd
@@ -109,7 +109,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
-# Load in data from PRS calculation step above (file ending in .sscore
+# Load in data from PRS calculation step above (file ending in .sscore)
 # PLINK2 PRS output
 data1 = pd.read_csv("yourfile.sscore", sep=r"\s+")
 
