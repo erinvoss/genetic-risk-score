@@ -6,17 +6,26 @@
 ## Description
 Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wide scores) is a summary measure of a set of risk-associated genetic variants and can be easily calculated using PLINK.
 
+The GP2 Learning Platform's [Beginner Bioinformatics for Parkinson's Disease Genetics](https://gp2.org/training-events/beginner-bioinformatics-for-parkinsons-disease-genetics/) virtual short course provides an overview of polygenic risk scores, how they are calculated, how to implement them for Parkinson's Disease, and how to interpret results. 
+
+# How to Calculate Polygenic Risk Scores 
+Multiple methods for polygenic risk score calculation have been developed by the bioinformatics community. Below, we outline the easiest and most common option, which is to use the plink2 --score function. 
+
+# Additional Options and Resources
+GP2 has developed an end-to-end PRS calculation pipeline using Nextflow, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
+
+[PRSice](https://choishingwan.github.io/PRSice/) 
+[LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
+
+
 ## Requirements 
-1. **PLINK** (v2.0 is used here)
-- The most common and easiest way to do this in PLINK [v2.0](https://www.cog-genomics.org/plink/2.0/score)
-- GP2 has developed an end-to-end PRS calculation pipeline using Nextflow, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
-- Other tools, including [PRSice](https://choishingwan.github.io/PRSice/) and [LDpred2](https://privefl.github.io/bigsnpr/articles/LDpred2.html), are available as well.
+1. **PLINK** ([v2.0 is used here](https://www.cog-genomics.org/plink/2.0/score))
 
 2. **PLINK Binary Files** (`.bed`, `.bim`, `.fam`)
 
 3. **Score File** 
 - This is a file with a variant identifier, allele, and an associated score value
-- These scores come from GWA Studies of your disease of interest.
+- These scores come from an independent GWAS of your disease of interest.
   	- Parkinson's Disease score file: [insert here] 
   	- Alzheimer's Disease score file: [insert here] 
   	- Additional diseases: [insert here] 
@@ -47,10 +56,9 @@ Where:
 The code below provides R and Python options to compare PRS scores between case and control individuals in your PLINK dataset as follows:
 1. Convert individual PRS scores to Z-scores.
 2. Generate a boxplot to visually compare PRS between groups.
-3. Apply a generalized linear model to evaluate whether PRS differs significantly between cases and controls.
-  - GLM takes covariates includge age, sex, and principal components into account. 
+3. Apply a generalized linear model to evaluate whether PRS differs significantly between cases and controls, taking into account covariates including age, sex, and principal components. 
 
-Option 1: R
+**Option 1: R**
 ```bash, R
 module load R #if on Biowulf
 
@@ -92,7 +100,7 @@ print(summary(model1))
 # this will output the real P-value
 ```
 
-Option 2: Python 
+**Option 2: Python** 
 ```bash, python3
 module load python
 
