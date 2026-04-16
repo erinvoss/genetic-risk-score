@@ -8,10 +8,10 @@ Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wi
 
 The GP2 Learning Platform's [Beginner Bioinformatics for Parkinson's Disease Genetics](https://gp2.org/training-events/beginner-bioinformatics-for-parkinsons-disease-genetics/) virtual short course provides an overview of polygenic risk scores, how they are calculated, how to implement them for Parkinson's Disease, and how to interpret results. 
 
-# How to Calculate Polygenic Risk Scores 
+### How to Calculate Polygenic Risk Scores 
 Multiple methods for polygenic risk score calculation have been developed by the bioinformatics community. Below, we outline the easiest and most common option, which is to use the plink2 --score function. 
 
-# Additional Options and Resources
+### Additional Options and Resources
 GP2 has developed an end-to-end PRS calculation pipeline using Nextflow, which is described [here](https://github.com/hirotaka-i/gp2-gwas-variants-cumulative-burden). 
 
 [PRSice](https://choishingwan.github.io/PRSice/) 
