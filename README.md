@@ -1,7 +1,7 @@
 ﻿# Polygenic Risk Score (PRS) Calculation
 
-- **Date Written:** 22.04.2019
-- **Date Last Updated:** 14.04.2026
+- **Date Written:** 04.22.2019
+- **Date Last Updated:** 04.17.2026
 
 ## Description
 Polygenic risk scores (AKA: genetic risk scores, polygenic  scores, or genome-wide scores) is a summary measure of a set of risk-associated genetic variants and can be easily calculated using PLINK.
